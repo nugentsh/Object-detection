@@ -16,13 +16,17 @@ gpi.setup(36, gpi.IN) #GPIO-16 INPUT-Button
 
 gpi.setup(31, gpi.OUT) #GPIO-6 OUTPUT-Speaker
 
-# evaluate if button is pressed
-if gpi.input(36):
-    print("button triggered")
-    object_detection()
-    if desired_detect == True:
-        gpi.output(31,True)
-        pg.mixer.music.play() #play sound
+trigger= 0
 
-    else:
-        print("No person detected")
+while trigger==0:
+    # evaluate if button is pressed
+    if gpi.input(36):
+        print("button triggered")
+        object_detection()
+        if desired_detect == True:
+            gpi.output(31,True)
+            pg.mixer.music.play() #play sound
+
+        else:
+            print("No person detected")
+        trigger = 1

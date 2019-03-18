@@ -15,3 +15,10 @@ python3.5 /home/pi/Desktop/object-detection/object_detection.py \
 --image /home/pi/Desktop/object-detection/image.jpg
 
 
+---update----
+Now runs object detection through a trigger program
+'myTrigger' takes button input, then calls the updated object detection function
+main function now has the picture taking task within its script
+no more need for calling through commands
+removed parsing of arguments
+program now has model manually inputted

@@ -9,6 +9,7 @@ sleep(5)
 PiCamera().capture('image.jpg')
 PiCamera().stop_preview()
 
+desired_detect = False
 
 # initialize the list of class labels MobileNet SSD was trained to
 # detect, then generate a set of bounding box colors for each class
@@ -67,7 +68,9 @@ for i in np.arange(0, detections.shape[2]):
 if 'person' in label:
         print("yes")
         desired_detect = True
-        
+else:
+	desired_detect = False
+
 # show the output image
 cv2.imshow("Output", image)
-cv2.waitKey(0)
+cv2.waitKey(3)

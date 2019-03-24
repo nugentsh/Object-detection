@@ -1,7 +1,6 @@
 import RPi.GPIO as gpi
 import pygame as pg
-from object_detection import object_detection
-from object_detection import desired_detect
+from time import sleep
 
 
 pg.mixer.init()
@@ -21,11 +20,15 @@ trigger= 0
 while trigger==0:
     # evaluate if button is pressed
     if gpi.input(36):
-        print("button triggered")
-        object_detection()
+        print("[INFO] button triggered")
+        import object_detection
+        from object_detection import desired_detect
         if desired_detect == True:
             gpi.output(31,True)
+            sleep(3)
+            gpi.output(31,False)
             pg.mixer.music.play() #play sound
+            print('detected')
 
         else:
             print("No person detected")

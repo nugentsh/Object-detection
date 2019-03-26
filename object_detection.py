@@ -11,14 +11,14 @@ PiCamera().stop_preview()
 
 desired_detect = False
 
-# initialize the list of class labels MobileNet SSD was trained to
-# detect, then generate a set of bounding box colors for each class
-# classes will be of more use in future
+# initialize the list of class labels MobileNet SSD was trained to detect
 CLASSES = ["background", "aeroplane", "bicycle", "bird", "boat",
 	"bottle", "bus", "car", "cat", "chair", "cow", "diningtable",
 	"dog", "horse", "motorbike", "person", "pottedplant", "sheep",
 	"sofa", "train", "tvmonitor"]
-COLORS = np.random.uniform(0, 255, size=(len(CLASSES), 3))
+	
+# then generate a random set of bounding box colors for each class
+COLORS = np.random.uniform(0, 255, size = (len(CLASSES), 3))
 
 # load the MobileNet pre-trained model
 print("[INFO] loading model...")
@@ -26,7 +26,7 @@ net = cv2.dnn.readNetFromCaffe('MobileNetSSD_deploy.prototxt.txt', 'MobileNetSSD
 
 # load the input image
 # resize to 300x300 pixels and then normalize
-# (normalization is done by MobileNet SSD implementation)
+# normalization is done by MobileNet SSD
 image = cv2.imread('image.jpg')
 (h, w) = image.shape[:2]
 blob = cv2.dnn.blobFromImage(cv2.resize(image, (300, 300)), 0.007843, (300, 300), 127.5)
@@ -36,18 +36,18 @@ print("[INFO] computing object detections...")
 net.setInput(blob)
 detections = net.forward()
 
-
+# set threshhold for detections to %20 confidence
 threshhold = 0.2 
+
 # loop over the detections
 for i in np.arange(0, detections.shape[2]):
-	# extract the confidence (i.e., probability) associated with the
-	# prediction
+	# extract the confidence in the prediction
 	confidence = detections[0, 0, i, 2]
 
 	# filter out weak detections by ensuring the confidence is
 	# greater than the threshhold confidence (20%)
 	if confidence > threshhold:
-		# extract the index of the class label from the `detections`,
+		# extract the index of the class label from the detections,
 		# then compute the (x, y)-coordinates of the bounding box for
 		# the object
 		idx = int(detections[0, 0, i, 1])

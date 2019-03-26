@@ -73,4 +73,6 @@ else:
 
 # show the output image
 cv2.imshow("Output", image)
-cv2.waitKey(3)
+cv2.waitKey(3000)
+cv2.destroyAllWindows()
+

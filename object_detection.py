@@ -28,7 +28,7 @@ net = cv2.dnn.readNetFromCaffe('MobileNetSSD_deploy.prototxt.txt', 'MobileNetSSD
 # load the input image
 # resize to 300x300 pixels and then normalize
 # normalization is done by MobileNet SSD
-image = cv2.imread('im3.jpeg')
+image = cv2.imread('image.jpg')
 (h, w) = image.shape[:2]
 blob = cv2.dnn.blobFromImage(cv2.resize(image, (300, 300)), 0.007843, (300, 300), 127.5)
 

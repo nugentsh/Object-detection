@@ -1,13 +1,14 @@
 import numpy as np
 import cv2
-#from picamera import PiCamera
-#from time import sleep
+from picamera import PiCamera
+from time import sleep
 
 # take picture with camera module and save as 'image.jpg'
-#PiCamera().start_preview()
-#sleep(5)
-#PiCamera().capture('image.jpg')
-#PiCamera().stop_preview()
+# 2 second delay added to allow camera to focus
+PiCamera().start_preview()
+sleep(2)
+PiCamera().capture('image.jpg')
+PiCamera().stop_preview()
 
 desired_detect = False
 
@@ -66,12 +67,10 @@ for i in np.arange(0, detections.shape[2]):
 
 # has a person been detected
 if 'person' in label:
-    print("yes")
     desired_detect = True
     import pygame as pg
-
     pg.mixer.init()
-    pg.mixer.music.load("belltone.mp3")  # file name here
+    pg.mixer.music.load("belltone.mp3")
     pg.mixer.music.play()
 else:
     desired_detect = False
